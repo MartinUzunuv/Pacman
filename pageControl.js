@@ -22,4 +22,4 @@ setInterval(() => {
   try {
     drawFrame();
   } catch (err) {}
-}, 50);
+}, 300);
