@@ -1,0 +1,6 @@
+.background {
+    background-color: "";
+    background-image: url('./img.webp');
+    background-size: cover;
+    /* background-position: 55% 100%; */
+  }

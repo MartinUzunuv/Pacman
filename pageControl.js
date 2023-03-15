@@ -14,6 +14,12 @@ function fillRect(startX, startY, endX, endY) {
   return newDiv;
 }
 
+//detect mouse position
+document.addEventListener("mousemove", function (event) {
+  mouseX = event.clientX;
+  mouseY = event.clientY;
+});
+
 //this is responsible for displaying each frame
 setInterval(() => {
   while (main.firstChild) {
