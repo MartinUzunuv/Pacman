@@ -3,4 +3,24 @@
     background-image: url('./img.webp');
     background-size: cover;
     /* background-position: 55% 100%; */
-  }
+}
+
+.coin {
+    background-color: "";
+    background-image: url('./img.webp');
+    /* background-size: cover; */
+    /* clip: rect(3%, 3%, 20%, 20%); */
+    background-position: right 40px bottom 40px;
+    background-size: 1600px;
+}
+
+.main {
+    position: absolute;
+}
+
+.score {
+    position: absolute;
+    z-index: 132;
+    color: white;
+    top: -10px;
+}

@@ -30,13 +30,13 @@
 После ще конзол-логна този стринг и директно ще го запиша в кода. Така ще спестя
 време.
 if (event.key === "1") {
-    
     if(arr[Math.floor(mouseX/cellSize)][Math.floor(mouseY/cellSize)] !== 5){
         arr[Math.floor(mouseX/cellSize)][Math.floor(mouseY/cellSize)] = 5
         n += `arr[${Math.floor(mouseX/cellSize)}][${Math.floor(mouseY/cellSize)}] = 2; `
     }
-  }
-
-  if (event.key === "2") {
+}
+if (event.key === "2") {
     console.log(n)
-  }
+}
+
+7. Време е да сложа изображения за монетите и да броя точки за изядена монета.

@@ -5,6 +5,8 @@ const matrixSizeY = 31;
 
 var cellSize;
 
+var score = 0;
+
 if (window.innerHeight > window.innerWidth) {
   cellSize = window.innerWidth / matrixSizeX;
 } else {
@@ -25,6 +27,7 @@ for (let x = 0; x < matrixSizeX; x++) {
   }
 }
 
+//all walls
 {
 arr[0][0] = 2;
 arr[1][0] = 2;
@@ -579,8 +582,6 @@ arr[25][27] = 2;
 //Pacman
 var pacman = { x: 1, y: 1, dir: 3 };
 
-let n = "";
-
 //The direction in which pacman will move. 0 - up, 1 - down, 2 - left, 3 - right.
 document.addEventListener("keydown", function (event) {
   if (event.key === "w" || event.key === "W" || event.key === "ArrowUp") {
@@ -609,18 +610,34 @@ function drawFrame() {
   background.style.backgroundPosition = "50%";
   if (pacman.dir === 0 && arr[pacman.x][pacman.y - 1] !== 2) {
     arr[pacman.x][pacman.y] = 0;
+    if(arr[pacman.x][pacman.y - 1] === 4){
+        score++
+        console.log(score)
+    }
     pacman.y = pacman.y - 1;
   }
   if (pacman.dir === 1 && arr[pacman.x][pacman.y + 1] !== 2) {
     arr[pacman.x][pacman.y] = 0;
+    if(arr[pacman.x][pacman.y + 1] === 4){
+        score++
+        console.log(score)
+    }
     pacman.y = pacman.y + 1;
   }
   if (pacman.dir === 2 && arr[pacman.x - 1][pacman.y] !== 2) {
     arr[pacman.x][pacman.y] = 0;
+    if(arr[pacman.x - 1][pacman.y] === 4){
+        score++
+        console.log(score)
+    }
     pacman.x = pacman.x - 1;
   }
   if (pacman.dir === 3 && arr[pacman.x + 1][pacman.y] !== 2) {
     arr[pacman.x][pacman.y] = 0;
+    if(arr[pacman.x + 1][pacman.y] === 4){
+        score++
+        console.log(score)
+    }
     pacman.x = pacman.x + 1;
   }
   arr[pacman.x][pacman.y] = 1;
@@ -631,14 +648,18 @@ function drawFrame() {
       }
       if (arr[x][y] === 1) {
         color = "yellow";
+        fillRect(x * cellSize, y * cellSize, cellSize - 1, cellSize - 1);
       }
       if (arr[x][y] === 2) {
         color = "";
       }
       if (arr[x][y] === 4) {
-        color = "white";
+        color = "#e6e5e3";
+        // let coin = fillRect(x * cellSize, y * cellSize, cellSize - 1, cellSize - 1);
+        // coin.className = "coin";
+        fillRect(x * cellSize + cellSize*0.4, y * cellSize+ cellSize*0.4, cellSize*0.2, cellSize*0.2)
       }
-      fillRect(x * cellSize, y * cellSize, cellSize - 1, cellSize - 1);
     }
   }
+  document.getElementById('score').innerHTML = `${score}`
 }
