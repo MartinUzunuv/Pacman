@@ -13,3 +13,13 @@ function fillRect(startX, startY, endX, endY) {
   newDiv.style.backgroundColor = color;
   return newDiv;
 }
+
+//this is responsible for displaying each frame
+setInterval(() => {
+  while (main.firstChild) {
+    main.removeChild(main.firstChild);
+  }
+  try {
+    drawFrame();
+  } catch (err) {}
+}, 50);
