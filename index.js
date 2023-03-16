@@ -598,6 +598,10 @@ document.addEventListener("keydown", function (event) {
   }
 });
 
+var ghosts = [];
+
+ghosts.push({ x: 14, y: 14 });
+
 //this will happen every frame
 function drawFrame() {
   let background = fillRect(
@@ -637,6 +641,96 @@ function drawFrame() {
     pacman.x = pacman.x + 1;
   }
   arr[pacman.x][pacman.y] = 1;
+  ghosts.forEach((ghost) => {
+    let prev = {x:ghost.x, y:ghost.y}
+    let tempArr = [];
+    for (let x = 0; x < arr.length; x++) {
+      tempArr.push([]);
+      for (let y = 0; y < arr[x].length; y++) {
+        tempArr[x].push({ type: arr[x][y], parent: null });
+      }
+    }
+    if (tempArr[ghost.x + 1][ghost.y].type !== 2) {
+      tempArr[ghost.x + 1][ghost.y].parent = { x: ghost.x + 1, y: ghost.y };
+    }
+    if (tempArr[ghost.x - 1][ghost.y].type !== 2) {
+      tempArr[ghost.x - 1][ghost.y].parent = { x: ghost.x - 1, y: ghost.y };
+    }
+    if (tempArr[ghost.x][ghost.y + 1].type !== 2) {
+      tempArr[ghost.x][ghost.y + 1].parent = { x: ghost.x, y: ghost.y + 1 };
+    }
+    if (tempArr[ghost.x][ghost.y - 1].type !== 2) {
+      tempArr[ghost.x][ghost.y - 1].parent = { x: ghost.x, y: ghost.y - 1 };
+    }
+    for (let i = 0; i < 80; i++) {
+      for (let x = 0; x < tempArr.length; x++) {
+        for (let y = 0; y < tempArr[x].length; y++) {
+          if (tempArr[x][y].parent !== null) {
+            if (
+              tempArr[x + 1][y].parent === null &&
+              tempArr[x + 1][y].type !== 2
+            ) {
+              tempArr[x + 1][y].parent = tempArr[x][y].parent;
+            }
+            if (
+              tempArr[x - 1][y].parent === null &&
+              tempArr[x - 1][y].type !== 2
+            ) {
+              tempArr[x - 1][y].parent = tempArr[x][y].parent;
+            }
+            if (
+              tempArr[x][y + 1].parent === null &&
+              tempArr[x][y + 1].type !== 2
+            ) {
+              tempArr[x][y + 1].parent = tempArr[x][y].parent;
+            }
+            if (
+              tempArr[x][y - 1].parent === null &&
+              tempArr[x][y - 1].type !== 2
+            ) {
+              tempArr[x][y - 1].parent = tempArr[x][y].parent;
+            }
+          }
+        }
+      }
+    }
+    if (
+      tempArr[pacman.x][pacman.y].parent.x === pacman.x &&
+      tempArr[pacman.x][pacman.y].parent.y === pacman.y
+    ){
+        console.log("ha ha loser")
+        gameEnd = "HA  HA  LOSER"
+    }
+      ghost.x = tempArr[pacman.x][pacman.y].parent.x;
+    ghost.y = tempArr[pacman.x][pacman.y].parent.y;
+
+    //arr[ghost.x][ghost.y] = 3;
+    color = "red";
+    let ghostDiv = fillRect(ghost.x * cellSize, ghost.y * cellSize, cellSize, cellSize);
+    ghostDiv.style.zIndex = 12424
+    ghostDiv.style.left = `${getX(ghostDiv) - cellSize * 0.4}px`;
+    ghostDiv.style.top = `${getY(ghostDiv) - cellSize * 0.4}px`;
+    ghostDiv.style.width = `${cellSize * 1.8}px`;
+    ghostDiv.style.height = `${cellSize * 1.8}px`;
+    ghostDiv.className = "entity";
+    ghostDiv.style.backgroundSize = `${cellSize * 80}px`;
+    let right = 0
+    if(frame % 2 === 0){
+        right+= 1.8
+    }
+    if(prev.x > ghost.x){
+        right+= 1.9*2
+    }
+    if(prev.y > ghost.y){
+        right+= 1.9*4
+    }
+    if(prev.y < ghost.y){
+        right+= 1.9*6
+    }
+    ghostDiv.style.backgroundPosition = `right ${
+        cellSize * (54.7 + 0.8 + right)
+    }px bottom ${cellSize * (1.8 + 7.6)}px`;
+  });
   for (let x = 0; x < arr.length; x++) {
     for (let y = 0; y < arr[x].length; y++) {
       if (arr[x][y] === 1) {
@@ -649,14 +743,14 @@ function drawFrame() {
         pman.className = "entity";
         pman.style.backgroundSize = `${cellSize * 80}px`;
         let drawDown = 0;
-        if(pacman.dir === 2){
-            drawDown = 1.9;
+        if (pacman.dir === 2) {
+          drawDown = 1.9;
         }
-        if(pacman.dir === 0){
-            drawDown = 1.9+1.9;
+        if (pacman.dir === 0) {
+          drawDown = 1.9 + 1.9;
         }
-        if(pacman.dir === 1){
-            drawDown = 1.9+1.9+1.9;
+        if (pacman.dir === 1) {
+          drawDown = 1.9 + 1.9 + 1.9;
         }
         if (frame % 2 === 0) {
           pman.style.backgroundPosition = `right ${

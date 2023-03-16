@@ -30,8 +30,11 @@ function getY(element) {
   return parseInt(element.style.top.slice(0, -2));
 }
 
+var gameEnd = null
+
 //this is responsible for displaying each frame
 setInterval(() => {
+  if(gameEnd === null){
   frame++
   while (main.firstChild) {
     main.removeChild(main.firstChild);
@@ -39,4 +42,12 @@ setInterval(() => {
   try {
     drawFrame();
   } catch (err) {}
+}else{
+  let end = document.getElementById('gameEnd')
+  end.innerHTML = gameEnd
+  end.style.fontSize = `${cellSize*3}px`
+  end.style.zIndex = 2123414
+  end.style.left = `${cellSize*4.25}px`
+  end.style.top = `${cellSize*9.5}px`
+}
 }, 300);
