@@ -2,6 +2,8 @@ const main = document.getElementById("main");
 
 color = "black";
 
+frame = 0
+
 function fillRect(startX, startY, endX, endY) {
   let newDiv = document.createElement("div");
   main.appendChild(newDiv);
@@ -20,8 +22,17 @@ document.addEventListener("mousemove", function (event) {
   mouseY = event.clientY;
 });
 
+function getX(element) {
+  return parseInt(element.style.left.slice(0, -2));
+}
+
+function getY(element) {
+  return parseInt(element.style.top.slice(0, -2));
+}
+
 //this is responsible for displaying each frame
 setInterval(() => {
+  frame++
   while (main.firstChild) {
     main.removeChild(main.firstChild);
   }
