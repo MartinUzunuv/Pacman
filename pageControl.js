@@ -1,3 +1,11 @@
+var topResult = 0;
+
+topResult = localStorage.getItem('topPacmanResult');
+
+if(topResult === null){
+  topResult = 0
+}
+
 const main = document.getElementById("main");
 
 color = "black";

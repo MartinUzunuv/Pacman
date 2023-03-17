@@ -700,6 +700,7 @@ function drawFrame() {
     ){
         console.log("ha ha loser")
         gameEnd = "HA  HA  LOSER"
+        localStorage.setItem('topPacmanResult', topResult);
     }
       ghost.x = tempArr[pacman.x][pacman.y].parent.x;
     ghost.y = tempArr[pacman.x][pacman.y].parent.y;
@@ -782,5 +783,9 @@ function drawFrame() {
       }
     }
   }
-  document.getElementById("score").innerHTML = `🏆${score}`;
+  if(score > topResult){
+    topResult = score
+    localStorage.setItem('topPacmanResult', topResult);
+  }
+  document.getElementById("score").innerHTML = `Top score: ${topResult}  🥇  |  Game score: ${score}  🏆`;
 }
