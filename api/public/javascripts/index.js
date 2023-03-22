@@ -700,7 +700,18 @@ function drawFrame() {
     ){
         console.log("ha ha loser")
         gameEnd = "HA  HA  LOSER"
-        localStorage.setItem('topPacmanResult', topResult);
+        //localStorage.setItem('topPacmanResult', topResult);
+        fetch("/updatePoints", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ name: username, password: password, topScore: topScore }),
+        })
+          .then((res) => res.json())
+          .then((res) => {
+           
+          });
     }
       ghost.x = tempArr[pacman.x][pacman.y].parent.x;
     ghost.y = tempArr[pacman.x][pacman.y].parent.y;
@@ -783,9 +794,9 @@ function drawFrame() {
       }
     }
   }
-  if(score > topResult){
-    topResult = score
-    localStorage.setItem('topPacmanResult', topResult);
+  if(score > topScore){
+    topScore = score
+    localStorage.setItem('topPacmanResult', topScore);
   }
-  document.getElementById("score").innerHTML = `Top score: ${topResult}  🥇  |  Game score: ${score}  🏆`;
+  document.getElementById("score").innerHTML = `Top score: ${topScore}  🥇  |  Game score: ${score}  🏆`;
 }

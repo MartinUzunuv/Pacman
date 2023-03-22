@@ -1,7 +1,5 @@
 var topResult = 0;
 
-topResult = localStorage.getItem('topPacmanResult');
-
 if(topResult === null){
   topResult = 0
 }
@@ -40,7 +38,11 @@ function getY(element) {
 
 var gameEnd = null
 
+//topResult = localStorage.getItem('topPacmanResult');
+
 var username = null
+var password = null
+var topScore = 0
 
 //this is responsible for displaying each frame
 setInterval(() => {
