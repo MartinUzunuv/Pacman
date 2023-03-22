@@ -1,0 +1,22 @@
+.background {
+    background-color: "";
+    background-image: url('/images/img.webp');
+    background-size: cover;
+    /* background-position: 55% 100%; */
+}
+
+.entity {
+    background-color: "";
+    background-image: url('/images/img.webp');
+}
+
+.main {
+    position: absolute;
+}
+
+.score {
+    position: absolute;
+    z-index: 132;
+    color: white;
+    top: -10px;
+}
