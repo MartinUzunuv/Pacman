@@ -99,7 +99,30 @@ router.post("/updatePoints", async (req, res) => {
       { $set: { topScore: newPoints }}
     );
   await client.close();
-  res.send();
+  res.send({});
 });
+
+router.get('/leadbord', async (req, res, next) => {
+  const client = new MongoClient(url);
+  try {
+    await client.connect();
+
+    const accounts = await client
+      .db("Pacman")
+      .collection("Accounts")
+      .find({}, { projection: { _id: 0, password: 0 } })
+      .toArray();
+
+    const listings = accounts.map(({ name, topScore }) => ({ name, topScore }));
+
+    res.render('leadbord', { listings });
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error occurred while fetching leaderboard data");
+  } finally {
+    await client.close();
+  }
+});
+
 
 module.exports = router;

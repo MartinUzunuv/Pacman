@@ -17,6 +17,7 @@
 .score {
     position: absolute;
     z-index: 132;
-    color: white;
+    color: rgb(206, 206, 206);
     top: -10px;
+    background-color: "red";
 }

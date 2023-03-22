@@ -50,6 +50,7 @@ setInterval(() => {
   frame++
   while (main.firstChild) {
     main.removeChild(main.firstChild);
+    console.log(main.children)
   }
   try {
     drawFrame();

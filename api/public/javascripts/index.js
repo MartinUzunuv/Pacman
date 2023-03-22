@@ -710,7 +710,9 @@ function drawFrame() {
         })
           .then((res) => res.json())
           .then((res) => {
-           
+           setTimeout(()=>{
+            window.location.href = "/leadbord";
+           },1000)
           });
     }
       ghost.x = tempArr[pacman.x][pacman.y].parent.x;

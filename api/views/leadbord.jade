@@ -1,0 +1,14 @@
+extends layout
+
+block content
+
+  button(onclick="window.location.href='/'") Go back to game
+
+  h1 Leaderboard🏆
+
+  script.
+    let listings = #{JSON.stringify(listings | safe)};
+    console.log(listings);
+
+  each listing in listings
+    p.listing name: #{listing.name} | score: #{listing.topScore}

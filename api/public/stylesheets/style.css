@@ -1,8 +1,52 @@
+*{
+  background-color: #000000;
+  color: rgb(206, 206, 206);
+}
+
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
+p {
+  background-color: '';
+}
+
+.nobg {
+  background-color: '';
+}
+
 a {
   color: #00B7FF;
+}
+
+.listing {
+  border: solid 3px;
+  border-color: blue;
+  border-radius: 15px;
+  color: rgb(206, 206, 206);
+  padding: 10px;
+  font-weight: bold;
+  font-size: large;
+}
+
+button {
+  background-color: yellow;
+  border: solid 3px;
+  border-color: black;
+  border-radius: 15px;
+  color: rgb(0, 0, 0);
+  padding: 10px;
+  font-weight: bold;
+  font-size: large;
+}
+
+.imputField {
+  border: solid 3px;
+  border-color: blue;
+  border-radius: 15px;
+  color: rgb(206, 206, 206);
+  padding: 10px;
+  font-weight: bold;
+  font-size: large;
 }
